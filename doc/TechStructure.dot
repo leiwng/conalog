@@ -1,0 +1,51 @@
+digraph TechStruct {
+  layout = "dot";
+  rankdir = "TB";
+  node [shape = "record"];
+
+  {
+    node [shape = plaintext, fontsize = 16];
+    "Front End (React + Reflux)" -> "Back End (Express.js)" -> "Main (Node.js)" -> "Service" -> "Cluster Server (Node.js)" -> "Cluster Runtime (Node.js)";
+  }
+
+  { rank = same; "Front End (React + Reflux)"; Flow_Designer; Grammar_IDE; }
+  { rank = same; "Back End (Express.js)"; "Web_Server (Express.js)"; }
+  { rank = same; "Main (Node.js)";
+    subgraph cluster_master {
+      label = "Master Cluster (Node.js)";
+      Master;
+      Backup_Master;
+    };
+  }
+  { rank = same; "Service"; HA_Server; Message_Queue; }
+  { rank = same; "Cluster Server (Node.js)"; Worker_Manager; }
+  { rank = same; "Cluster Runtime (Node.js)";
+    subgraph cluster_worker {
+      label = "Worker Server (Node.js)";
+      Worker1;
+      Worker2;
+      Worker3;
+    };
+  }
+
+  "Web_Server (Express.js)" -> Master [dir = "both"];
+
+  Master -> Message_Queue;
+  Master -> HA_Server [dir = "both"];
+
+  Backup_Master -> HA_Server [dir = "both"];
+
+  Worker_Manager -> HA_Server [dir = "both"];
+  Worker_Manager -> Worker1;
+  Worker_Manager -> Worker2;
+  Worker_Manager -> Worker3;
+
+  Worker1 -> HA_Server [dir = "both"];
+  Worker2 -> HA_Server [dir = "both"];
+  Worker3 -> HA_Server [dir = "both"];
+
+  Message_Queue -> Worker_Manager;
+
+  Flow_Designer -> Grammar_IDE;
+  Flow_Designer -> "Web_Server (Express.js)";
+}

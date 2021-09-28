@@ -1,0 +1,29 @@
+digraph UserFlow {
+  login;
+  main;
+  collector;
+  subgraph cluster_parser {
+    label = "parser";
+    "flow designer";
+    "grammer IDE";
+
+    "flow designer" -> "grammer IDE";
+  }
+  status;
+  history;
+  admin;
+  help;
+
+  login -> main;
+
+  main -> collector [dir = "both"];
+  main -> "flow designer" [dir = "both"];
+  main -> status [dir = "both"];
+  main -> history [dir = "both"];
+  main -> admin [dir = "both"];
+  main -> help [dir = "both"];
+
+  "flow designer" -> collector;
+
+  history -> "grammer IDE";
+}
