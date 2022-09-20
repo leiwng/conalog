@@ -31,7 +31,7 @@ let encodePass = (rawCert, conalogPass) => {
   let key = hash.digest()
 
   // 2. encode pass
-  let cipher = Crypto.createCipheriv('aes-256-ecb', key, '')
+  let cipher = Crypto.createCipheriv('aes-256-cbc', key, '')
   cipher.setAutoPadding = true
   let encodedPass = cipher.update(rawCert.pass, 'ascii', 'hex')
   encodedPass += cipher.final('hex')
@@ -47,7 +47,7 @@ let decodePass = (encodedCert, conalogPass) => {
   let key = hash.digest()
 
   // 2. decode pass
-  let decipher = Crypto.createDecipheriv('aes-256-ecb', key, '')
+  let decipher = Crypto.createDecipheriv('aes-256-cbc', key, '')
   let decodedPass = decipher.update(encodedCert.pass, 'hex', 'ascii')
   decodedPass += decipher.final('ascii')
 
