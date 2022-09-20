@@ -27,7 +27,7 @@ let resetState = () => {
 let messageHandler = (parser, channel, message) => {
   switch (state) {
       case states.header:
-        if (message.match('{H:') != null) {
+        if (message.match('{H:') !== null) {
           var index = message.indexOf('{H:')
           var time = message.substr(0,index).split(',')[0]
           var timestamp = Date.parse(new Date(time))/1000
@@ -56,7 +56,7 @@ let messageHandler = (parser, channel, message) => {
       if (message.indexOf("</Document>") != -1) {
         try {
           parseString(buffer, {ignoreAttrs: true}, (err, xmlJson) => {
-            if (err == null) {
+            if (err === null) {
               result.xml = xmlJson
               parser.sendResult(JSON.stringify(result))
             }

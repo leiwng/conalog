@@ -34,7 +34,7 @@ class CollectorManager {
         if (ret == 1) {
           redisProvider.lrange(constants.PLANNED_TASK_LIST, 0, -1)
             .then(list => {
-              if (list !== undefined && list != null)
+              if (list !== undefined && list !== null)
                 that.state.plannedTaskList = list
                 // console.log('CollectorManager::constructor()', constants.PLANNED_TASK_LIST, list)
             })
@@ -162,7 +162,7 @@ class CollectorManager {
     // TODO : read state from etcd - only need to read plannedTaskList
     redisProvider.lrange(constants.PLANNED_TASK_LIST, 0, -1)
       .then(list => {
-        if (list !== undefined && list != null)
+        if (list !== undefined && list !== null)
           that.state.plannedTaskList = list
           // console.log('CollectorManager::sync()', constants.PLANNED_TASK_LIST, list)
       })
@@ -200,7 +200,7 @@ class CollectorManager {
         // console.log('CollectorManager::sync - taskId', taskId)
         mongoProvider.query(constants.COLLECTOR_COLL, { _id: new ObjectID(taskId) })
           .then((json) => {
-            if (json !== undefined && json != null) {
+            if (json !== undefined && json !== null) {
               let taskJson = new CollectorTask({
                 collectorJson: json
               })
@@ -277,7 +277,7 @@ class CollectorManager {
           return null
       })
       .filter(curr => {
-        if (curr != null)
+        if (curr !== null)
           return true
         else
           return false

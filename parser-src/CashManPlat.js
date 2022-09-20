@@ -97,7 +97,7 @@ const parseXmlMsg = (parser, xml_head_str, xml_tail_str) => {
   try {
     // 将XML格式字串转换为JSON对象，返回值在xmlJson中，错误信息在err中
     parseString(msg, { explicitArray: false }, (err, xmlJson) => {
-      if (err == null) {
+      if (err === null) {
         //将JSON格式的KV，转换成JavaScript的Map中的KV，存入PackMsgInfo
 
         //Debug
@@ -272,7 +272,7 @@ let messageHandler = (parser, channel, message) => {
         // 取出之前保存的报文数据
         let finalPackData = cash_man_plat_map.get(MsgInfo.linkID).data
 
-        if (finalPackData != null) {
+        if (finalPackData !== null) {
           // get duration
           finalPackData['duration'] = MsgInfo.duration
 

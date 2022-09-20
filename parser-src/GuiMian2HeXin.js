@@ -162,7 +162,7 @@ let messageHandler = (parser, channel, message) => {
 
         let finalPackData = guimian_2_hexin_map.get(link_id).data
 
-        if (finalPackData != null) {
+        if (finalPackData !== null) {
           finalPackData.duration = MsgInfo.endTime.getTime() - MsgInfo.startTime.getTime()
 
           parser.sendResult(JSON.stringify(finalPackData))

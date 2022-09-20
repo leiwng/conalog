@@ -25,7 +25,7 @@ let messageHandler = (parser, channel, message) => {
       var SrcSysSeqNo
       if (xml.indexOf('<?xml') != -1) {
         parseString(xml, { explicitArray: false }, (err, xmlJson) => {
-          if (err == null) {
+          if (err === null) {
             SrcSysSeqNo = xmlJson.service.SYS_HEAD.SrcSysSeqNo
            // console.log("1", SrcSysSeqNo)
           }

@@ -64,7 +64,7 @@ const parseXmlMsg = (parser) => {
   try {
     // 将XML格式字串转换为JSON对象，返回值在xmlJson中，错误信息在err中
     parseString(msg, { explicitArray: false }, (err, xmlJson) => {
-      if (err == null) {
+      if (err === null) {
         //将JSON格式的KV，转换成JavaScript的Map中的KV，存入PackMsgInfo
 
         //Debug
@@ -200,7 +200,7 @@ let messageHandler = (parser, channel, message) => {
 
         let finalPackData = mobile_bank_map.get(MsgInfo.processID).data
 
-        if (finalPackData != null) {
+        if (finalPackData !== null) {
           finalPackData.duration = MsgInfo.endTime.getTime() - MsgInfo.startTime.getTime()
 
           parser.sendResult(JSON.stringify(finalPackData))

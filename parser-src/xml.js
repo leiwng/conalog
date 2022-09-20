@@ -30,7 +30,7 @@ subClient.on('message', (channel, message) => {
   // filebeat message example: "{\"@timestamp\":\"2017-03-27T06:00:18.146Z\",\"beat\":{\"hostname\":\"voyager\",\"name\":\"voyager\",\"version\":\"5.2.2\"},\"input_type\":\"log\",\"message\":\"feaslkejfl;aksjefl;kababdasefaaaseafsef\",\"offset\":133,\"source\":\"/home/voyager/xd/filebeat-test/d_3.log\",\"type\":\"log\"}"
 
   let json = JSON.parse(message)
-  if (buffer[json.source] === undefined || buffer[json.source] == null)
+  if (buffer[json.source] === undefined || buffer[json.source] === null)
     buffer[json.source] = json
   else {
     buffer[json.source].message += json.message
@@ -45,7 +45,7 @@ subClient.on('message', (channel, message) => {
   // search for closing tag - for a custom parser, most changes should be here
   if (msg.search('</msg>') > -1) {
     parseString(msg, (err, result) => {
-      if (err == null) {
+      if (err === null) {
         buffer[json.source].message = result
 
         // update last activity

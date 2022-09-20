@@ -74,7 +74,7 @@ class NsqProvider {
             let serial = now.getTime().toString()
 
             let topicDict = readers[topic]
-            if (topicDict === undefined || topicDict == null)
+            if (topicDict === undefined || topicDict === null)
                 topicDict = {}
 
             topicDict[serial] = reader
@@ -100,7 +100,7 @@ class NsqProvider {
     } // listen()
 
     close(topic, serial) {
-        if (readers[topic] === undefined || readers[topic] == null) {
+        if (readers[topic] === undefined || readers[topic] === null) {
             logger.warning(2905,
                 null,
                 'Nsq close warning',
@@ -111,7 +111,7 @@ class NsqProvider {
         }
         else {
             let topicDict = readers[topic]
-            if (topicDict[serial] === undefined || topicDict[serial] == null) {
+            if (topicDict[serial] === undefined || topicDict[serial] === null) {
                 logger.warning(2906,
                     null,
                     'Nsq close warning',

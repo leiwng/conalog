@@ -24,24 +24,24 @@ let pageInfo = {
 }
 
 router.post('/pageinfo', authorize, (req, res, next) => {
-  if (req.body.sortField !== undefined && req.body.sortField != null)
+  if (req.body.sortField !== undefined && req.body.sortField !== null)
     pageInfo.sortField = req.body.sortField
   if (pageInfo.sortField == 'id')
     pageInfo.sortField = '_id'
   if (pageInfo.sortField == 'date')
     pageInfo.sortField = 'ts'
 
-  if (req.body.sortDir !== undefined && req.body.sortDir != null)
+  if (req.body.sortDir !== undefined && req.body.sortDir !== null)
     if (req.body.sortDir == 'asc')
       pageInfo.sortDir = 1
     else
       pageInfo.sortDir = -1
 
-  if (req.body.from !== undefined && req.body.from != null)
+  if (req.body.from !== undefined && req.body.from !== null)
     pageInfo.fromDate = req.body.from
-  if (req.body.to !== undefined && req.body.to != null)
+  if (req.body.to !== undefined && req.body.to !== null)
     pageInfo.toDate = req.body.to
-  if (req.body.pageSize !== undefined && req.body.pageSize != null)
+  if (req.body.pageSize !== undefined && req.body.pageSize !== null)
     pageInfo.pageSize = parseInt(req.body.pageSize)
 
   // refresh list
@@ -50,32 +50,32 @@ router.post('/pageinfo', authorize, (req, res, next) => {
   let filter = {}
   let toTs
 
-  if (pageInfo.toDate !== undefined && pageInfo.toDate != null)
+  if (pageInfo.toDate !== undefined && pageInfo.toDate !== null)
     toTs = Date.parse(pageInfo.toDate);
 
-  if (pageInfo.fromDate !== undefined && pageInfo.fromDate != null)
+  if (pageInfo.fromDate !== undefined && pageInfo.fromDate !== null)
   {
     let fromTs = Date.parse(pageInfo.fromDate);
     filter = { $and: [ { ts: { $gt: fromTs } },  { ts: { $lt: toTs } } ] };
   }
 
-  if (req.params.level !== undefined && req.params.level != null)
+  if (req.params.level !== undefined && req.params.level !== null)
     filter.level = req.params.level;
-  if (req.params.module !== undefined && req.params.module != null)
+  if (req.params.module !== undefined && req.params.module !== null)
     filter.module = req.params.module;
-  if (req.params.source !== undefined && req.params.source != null)
+  if (req.params.source !== undefined && req.params.source !== null)
     filter.source = req.params.source;
-  if (req.params.machine !== undefined && req.params.machine != null)
+  if (req.params.machine !== undefined && req.params.machine !== null)
     filter.machine = req.params.machine;
-  if (req.params.user !== undefined && req.params.user != null)
+  if (req.params.user !== undefined && req.params.user !== null)
     filter.user = req.params.user;
-  if (req.params.eventid !== undefined && req.params.eventid != null)
+  if (req.params.eventid !== undefined && req.params.eventid !== null)
     filter.eventId = req.params.eventid;
-  if (req.params.type !== undefined && req.params.type != null)
+  if (req.params.type !== undefined && req.params.type !== null)
     filter.type = req.params.type;
 
   console.log(pageInfo)
-  if (pageInfo.sortField !== undefined && pageInfo.sortField != null)
+  if (pageInfo.sortField !== undefined && pageInfo.sortField !== null)
   {
     let sortFilter = {}
     _.set(sortFilter, pageInfo.sortField, pageInfo.sortDir)
@@ -119,28 +119,28 @@ router.post('/pageinfo', authorize, (req, res, next) => {
 router.get('/pagecount', authorize, function(req, res, next) {
   var filter = {};
 
-  if (pageInfo.toDate !== undefined && pageInfo.toDate != null)
+  if (pageInfo.toDate !== undefined && pageInfo.toDate !== null)
     toTs = Date.parse(toDate);
 
-  if (pageInfo.fromDate !== undefined && pageInfo.fromDate != null)
+  if (pageInfo.fromDate !== undefined && pageInfo.fromDate !== null)
   {
     var fromTs = Date.parse(fromDate);
     filter = { $and: [ { ts: { $gt: pageInfo.fromTs } },  { ts: { $lt: pageInfo.toTs } } ] };
   }
 
-  if (req.params.level !== undefined && req.params.level != null)
+  if (req.params.level !== undefined && req.params.level !== null)
     filter.level = req.params.level;
-  if (req.params.module !== undefined && req.params.module != null)
+  if (req.params.module !== undefined && req.params.module !== null)
     filter.module = req.params.module;
-  if (req.params.source !== undefined && req.params.source != null)
+  if (req.params.source !== undefined && req.params.source !== null)
     filter.source = req.params.source;
-  if (req.params.machine !== undefined && req.params.machine != null)
+  if (req.params.machine !== undefined && req.params.machine !== null)
     filter.machine = req.params.machine;
-  if (req.params.user !== undefined && req.params.user != null)
+  if (req.params.user !== undefined && req.params.user !== null)
     filter.user = req.params.user;
-  if (req.params.eventid !== undefined && req.params.eventid != null)
+  if (req.params.eventid !== undefined && req.params.eventid !== null)
     filter.eventId = req.params.eventid;
-  if (req.params.type !== undefined && req.params.type != null)
+  if (req.params.type !== undefined && req.params.type !== null)
     filter.type = req.params.type;
 
   // console.log(filter)
@@ -225,7 +225,7 @@ router.get('/page', authorize, function(req, res, next) {
   // for user, page starts from 1
   pageInfo.page = parseInt(req.query.pageNo) - 1
   pageInfo.pageSize = parseInt(req.query.pageSize)
-  if (req.query.sortField !== undefined && req.query.sortField != null) {
+  if (req.query.sortField !== undefined && req.query.sortField !== null) {
     pageInfo.sortField = req.query.sortField
     if (req.query.sortOrder == 'descend')
       pageInfo.sortOrder = -1 // descend
@@ -279,7 +279,7 @@ router.get('/page', authorize, function(req, res, next) {
   }
   */
   // console.log(JSON.stringify(pageInfo))
-  if (pageInfo.sortField !== undefined && pageInfo.sortField != null)
+  if (pageInfo.sortField !== undefined && pageInfo.sortField !== null)
     mongoProvider.list(constants.LOG_COLL,
       pageInfo.filters,
       pageInfo.pageSize,

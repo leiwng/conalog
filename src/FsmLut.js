@@ -52,7 +52,7 @@ class FsmLut {
 
     scan() {
         // scan wrapper
-        if (this.table !== undefined && this.table != null) {
+        if (this.table !== undefined && this.table !== null) {
             Object.keys(this.table).map((key) => {
                 const item = { key, value: this.table[key] }
                 this.scanCallback(item, this)

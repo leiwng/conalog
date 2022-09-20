@@ -52,7 +52,7 @@ class NanomsgQueueProvider {
       // console.log('nanomsgQueueProvider::constructor - repSock recv data: ' + buf.toString())
       let topic = buf.toString()
       let sockInfo = this.pushSockTable[topic]
-      if (sockInfo !== undefined || sockInfo != null)
+      if (sockInfo !== undefined || sockInfo !== null)
         this.repSock.send(JSON.stringify({topic: topic, port: sockInfo.port}))
       else
         this.repSock.send(JSON.stringify({topic: topic, port: -1}))

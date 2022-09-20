@@ -28,7 +28,7 @@ class ParserManager {
         instanceList = JSON.parse(instanceList)
         // console.log('ParserManager::constructor', instanceList)
 
-        if (instanceList != null && instanceList !== undefined && instanceList.length != 0)
+        if (instanceList !== null && instanceList !== undefined && instanceList.length != 0)
           instanceList.map(instance => {
             that.startInstance({parserId: instance})
           })
@@ -133,7 +133,7 @@ class ParserManager {
     let that = this
     that.pid = undefined
     let childInfo = this.instanceTable.reduce((prev, curr) => {
-      if (prev != null)
+      if (prev !== null)
         return prev
       else if (curr.id == instanceId)
         return curr
@@ -141,7 +141,7 @@ class ParserManager {
 
     // console.log('stopInstance', instanceId, childInfo)
 
-    if (childInfo !== undefined && childInfo != null) {
+    if (childInfo !== undefined && childInfo !== null) {
       try {
         clearInterval(childInfo.interval)
         childInfo.process.disconnect()
@@ -178,13 +178,13 @@ class ParserManager {
 
   queryInstanceById({id: id}) {
     let childInfo = this.instanceTable.reduce((prev, curr) => {
-      if (prev != null)
+      if (prev !== null)
         return prev
       else if (curr.id == id)
         return curr
     }, null)
 
-    if (childInfo !== undefined && childInfo != null) {
+    if (childInfo !== undefined && childInfo !== null) {
       let instanceInfo = {
         id: id,
         parserId: childInfo.parserId,
@@ -202,7 +202,7 @@ class ParserManager {
 
     let instanceList = []
 
-    if (parserId !== undefined && parserId != null) {
+    if (parserId !== undefined && parserId !== null) {
       let parserInstances = this.instanceTable.filter(instance => {
         if (instance.parserId == parserId)
           return true

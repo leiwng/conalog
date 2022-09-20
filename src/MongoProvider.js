@@ -48,7 +48,7 @@ class MongoProvider {
       })
       .then(cursor => {
         Promise.promisifyAll(cursor)
-        if (sort !== undefined && sort != null)
+        if (sort !== undefined && sort !== null)
           return cursor.sort(sort)
         else
           return cursor

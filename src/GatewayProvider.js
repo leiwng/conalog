@@ -24,7 +24,7 @@ class GatewayProvider {
 
   deletePlan(flowId) {
     let path
-    if (flowId !== undefined && flowId != null)
+    if (flowId !== undefined && flowId !== null)
       path = '/deployPlan/' + flowId
     else
       path = '/deployPlan'
@@ -34,7 +34,7 @@ class GatewayProvider {
 
   startApi(flowId) {
     let path
-    if (flowId !== undefined && flowId != null)
+    if (flowId !== undefined && flowId !== null)
       path = '/startapi/' + flowId
     else
       path = '/startapi'
@@ -44,7 +44,7 @@ class GatewayProvider {
 
   stopApi(flowId) {
     let path
-    if (flowId !== undefined && flowId != null)
+    if (flowId !== undefined && flowId !== null)
       path = '/stopapi/' + flowId
     else
       path = '/stopapi'

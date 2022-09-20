@@ -134,7 +134,7 @@ removeCert(query) {
     return new Promise((resolve, reject) => {
       mongoProvider.list(constants.CERT_COLL, {}, constants.CERT_LIMIT, null, 0)
         .then(ret => {
-          if (ret !== undefined && ret != null)
+          if (ret !== undefined && ret !== null)
             resolve(ret)
           else {
             logger.error(31006,
@@ -166,7 +166,7 @@ removeCert(query) {
     return new Promise((resolve, reject) => {
       mongoProvider.query(constants.CERT_COLL, {host: host})
         .then(ret => {
-          if (ret !== undefined && ret != null)
+          if (ret !== undefined && ret !== null)
             resolve(ret)
           else {
             logger.error(31006,

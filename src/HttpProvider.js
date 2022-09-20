@@ -33,7 +33,7 @@ class HttpProvider {
       let opts = {}
 
       _.assign(opts, this.opts)
-      if (extraHeaders !== undefined && extraHeaders != null)
+      if (extraHeaders !== undefined && extraHeaders !== null)
         _.assign(opts.headers, extraHeaders)
 
       opts.method = method

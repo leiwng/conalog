@@ -45,7 +45,7 @@ let messageHandler = (parser, channel, message) => {
         break;
 
         case states.header:
-        if (message.match('{H:') != null) {
+        if (message.match('{H:') !== null) {
             // parse header
             try {
                 let header = headerParser.parse(message)
@@ -67,7 +67,7 @@ let messageHandler = (parser, channel, message) => {
         if (message.indexOf("</Document>") != -1) {
             try {
                 parseString(buffer, (err, xmlJson) => {
-                    if (err == null) {
+                    if (err === null) {
                         result.xml = xmlJson
                         parser.sendResult(JSON.stringify(result))
                     }
