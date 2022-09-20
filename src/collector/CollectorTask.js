@@ -54,7 +54,7 @@ class CollectorTask extends Collector {
 
       default:
       return NULL
-      break
+      
     }
 
     return this
