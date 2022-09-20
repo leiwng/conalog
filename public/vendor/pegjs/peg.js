@@ -29,7 +29,7 @@ var peg = {
       var converted = {}, stage;
 
       for (stage in passes) {
-        if (passes.hasOwnProperty(stage)) {
+        if (Object.prototype.hasOwnProperty.call(passes, stage)) {
           converted[stage] = objects.values(passes[stage]);
         }
       }

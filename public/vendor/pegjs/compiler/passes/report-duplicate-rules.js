@@ -9,7 +9,7 @@ function reportDuplicateRules(ast) {
 
   var check = visitor.build({
     rule: function(node) {
-      if (rules.hasOwnProperty(node.name)) {
+      if (Object.prototype.hasOwnProperty.call(rules, node.name)) {
         throw new GrammarError(
           "Rule \"" + node.name + "\" is already defined "
             + "at line " + rules[node.name].start.line + ", "

@@ -45,7 +45,7 @@ var compiler = {
     });
 
     for (stage in passes) {
-      if (passes.hasOwnProperty(stage)) {
+      if (Object.prototype.hasOwnProperty.call(passes, stage)) {
         arrays.each(passes[stage], function(p) { p(ast, options); });
       }
     }
