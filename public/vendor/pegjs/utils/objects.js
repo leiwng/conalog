@@ -6,7 +6,7 @@ var objects = {
     var result = [], key;
 
     for (key in object) {
-      if (object.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
         result.push(key);
       }
     }
@@ -18,7 +18,7 @@ var objects = {
     var result = [], key;
 
     for (key in object) {
-      if (object.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
         result.push(object[key]);
       }
     }
@@ -30,7 +30,7 @@ var objects = {
     var result = {}, key;
 
     for (key in object) {
-      if (object.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
         result[key] = object[key];
       }
     }
@@ -42,7 +42,7 @@ var objects = {
     var key;
 
     for (key in defaults) {
-      if (defaults.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(defaults, key)) {
         if (!(key in object)) {
           object[key] = defaults[key];
         }

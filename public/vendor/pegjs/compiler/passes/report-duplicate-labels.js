@@ -25,7 +25,7 @@ function reportDuplicateLabels(ast) {
     action: checkExpressionWithClonedEnv,
 
     labeled: function(node, env) {
-      if (env.hasOwnProperty(node.label)) {
+      if (Object.prototype.hasOwnProperty.call(env, node.label)) {
         throw new GrammarError(
           "Label \"" + node.label + "\" is already defined "
             + "at line " + env[node.label].start.line + ", "
