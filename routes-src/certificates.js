@@ -36,7 +36,7 @@ let decryptPass = (name, host, pass, ts) => {
 
         // got key, now decode pass
         let iv = ''
-        let decipher = Crypto.createDecipheriv('aes-256-ecb', key, iv)
+        let decipher = Crypto.createDecipheriv('aes-256-cbc', key, iv)
         decipher.setAutoPadding = true
         let decodedPass = decipher.update(pass, 'hex', 'ascii')
         decodedPass += decipher.final('ascii')
@@ -62,7 +62,7 @@ let encryptPass = (name, host, pass, ts) => {
 
         // got key, now encode pass
         let iv = ''
-        let cipher = Crypto.createCipheriv('aes-256-ecb', key, iv)
+        let cipher = Crypto.createCipheriv('aes-256-cbc', key, iv)
         cipher.setAutoPadding = true
         // TODO : check the following ascii hex thing...
         let encodedPass = cipher.update(pass, 'ascii', 'hex')
