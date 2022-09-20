@@ -172,7 +172,7 @@ class PassiveCollector {
     let that = this
 
     // console.log('STDOUT: ' + data);
-    if (data == undefined || data == null) {
+    if (data == undefined || data === null) {
       // do nothing, just leave
       return
     }
@@ -181,7 +181,7 @@ class PassiveCollector {
 
     // Modified by Xie Di, 20161202 - Issue #47
     // check \n BEFORE chartset convertion so we won't miss it
-    if (that.dataPool == null) {
+    if (that.dataPool === null) {
       if (data[data.length - 1] == 10) {
         // console.log("\n dataPool = 0, GOT newline.")
         // Modified by Xie Di, 2016.11.24, Issue #46 - encode to utf-8 before pub to redis
@@ -218,7 +218,7 @@ class PassiveCollector {
 
     let lines = dataBuffer.toString("utf-8").split("\n")
     lines.map(line => {
-      if (line !== undefined && line != null && line !="") {
+      if (line !== undefined && line !== null && line !="") {
         // save last activity
         let now = new Date()
         that.lastActivity.execCounter += 1

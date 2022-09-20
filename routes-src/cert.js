@@ -23,7 +23,7 @@ let decryptPass = (name, host, pass, ts) => {
 
   return mongoProvider.query(constants.USER_COLL, query)
     .then(user => {
-      if (user !== undefined && user != null) {
+      if (user !== undefined && user !== null) {
         // got conalog user, now create key
         let keySeed = host + user.pass + ts
         let hash = Crypto.createHash('sha256')
@@ -57,7 +57,7 @@ let encryptPass = (name, host, pass, ts) => {
 
   return mongoProvider.query(constants.USER_COLL, query)
     .then(user => {
-      if (user !== undefined && user != null) {
+      if (user !== undefined && user !== null) {
         // got conalog user, now create key
         let keySeed = host + user.pass + ts
         let hash = Crypto.createHash('sha256')
@@ -100,7 +100,7 @@ router.post('/', authorize, (req, res, next) => {
   // 1. query user pass
   decryptPass(name, host, pass, ts)
     .then(decodedPass => {
-      if (decodedPass != null) {
+      if (decodedPass !== null) {
         // 2. add certification
         certManager.addCert(host, port, user, decodedPass, ts)
           .then(idJson => {
@@ -136,7 +136,7 @@ router.get('/:host', authorize, (req, res, next) => {
     .then(cert => {
       encryptPass(name, host, cert.pass, cert.ts)
         .then(encodedPass => {
-          if (encodedPass != null) {
+          if (encodedPass !== null) {
             cert.pass = encodedPass
             res.json(cert)
           }
@@ -160,11 +160,11 @@ router.get('/', authorize, (req, res, next) => {
   let query = {}
 
   let id = req.query.id
-  if (id !== undefined && id != null) 
+  if (id !== undefined && id !== null) 
     query['_id'] = new ObjectID(id)
   
   let host = req.query.host
-  if (host !== undefined && host != null)
+  if (host !== undefined && host !== null)
     query['host'] = host
 
   certManager.listCerts(query)
@@ -185,7 +185,7 @@ router.get('/', authorize, (req, res, next) => {
 router.get('/:id/validation/', (req, res, next) => {
   let query = {}
   let id = req.params.id
-  if (id !== undefined && id != null)
+  if (id !== undefined && id !== null)
     query['_id'] = new ObjectID(id)
 
   // TODO : validate ssh certification
@@ -204,7 +204,7 @@ router.put('/', authorize, (req, res, next) => {
   // 1. query user pass
   mongoProvider.query(constants.USER_COLL, {_id: new ObjectID(id)})
     .then(result => {
-      if (result !== undefined && result != null) {
+      if (result !== undefined && result !== null) {
         // got user, now create key
         let keySeed = host + result.pass + ts
         let hash = Crypto.createHash('sha256')
@@ -299,27 +299,27 @@ router.patch('/', (req, res, next) => {
   certManager.query(query)
     .then(cert => {
       let host = req.body.host
-      if (host !== undefined && host != null)
+      if (host !== undefined && host !== null)
         cert.host = host
 
       let port = req.body.port
-      if (port !== undefined && port != null)
+      if (port !== undefined && port !== null)
         cert.port = port
 
       let user = req.body.user // remote system ssh cert user
-      if (user !== undefined && user != null)
+      if (user !== undefined && user !== null)
         cert.user = user
 
       let pass = req.body.pass
-      if (pass !== undefined && pass != null)
+      if (pass !== undefined && pass !== null)
         cert.pass = pass
 
       let ts = req.body.ts
-      if (ts !== undefined && ts != null)
+      if (ts !== undefined && ts !== null)
         cert.ts = ts
 
       let name = req.body.name // conalog user name
-      if (name !== undefined && name != null)
+      if (name !== undefined && name !== null)
         cert.name = name
 
       certManager.updateCert(cert.id, cert.host, cert.port, cert.user, cert.decodedPass, cert.ts)

@@ -63,7 +63,7 @@ let messageHandler = (parser, channel, message) => {
 
             if (msg.indexOf('<?xml') != -1) {
               parseString(msg, { explicitArray: false }, (err, xmlJson) => {
-                if (err == null) {
+                if (err === null) {
                   result = xmlJson
                   result['startTime'] = startTs
                   result['endTime'] = endTs
@@ -119,7 +119,7 @@ let messageHandler = (parser, channel, message) => {
         try {
           //处理多行xml
           parseString(buffer, { explicitArray: false }, (err, xmlJson) => {
-            if (err == null) {
+            if (err === null) {
               result = xmlJson
               result['startTime'] = startTs
               result['endTime'] = endTs
@@ -148,7 +148,7 @@ let messageHandler = (parser, channel, message) => {
       } else {
         try {
           parseString(buffer, { explicitArray: false }, (err, xmlJson) => {
-            if (err == null) {
+            if (err === null) {
               result = xmlJson
               result['startTime'] = startTs
               result['endTime'] = endTs

@@ -12,7 +12,7 @@ let init = () => {
   // insert default user at the first startup
   mongoProvider.query(constants.USER_COLL, {name: 'admin'})
     .then(user => {
-      if (user == null || user === undefined) {
+      if (user === null || user === undefined) {
         mongoProvider.insert(constants.USER_COLL, {name: 'admin', pass: 'admininitpass'})
       }
     })

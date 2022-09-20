@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
   mongoProvider.query(constants.GRAMMAR_COLL, query)
     .then(function(grammar) {
-      if (grammar !== undefined && grammar != null) {
+      if (grammar !== undefined && grammar !== null) {
         res.json(grammar);
       }
       else { // no grammar found

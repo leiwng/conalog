@@ -36,7 +36,7 @@ const parseXml = (parser) => {
   let msg = buffer.substr(buffer.indexOf('<?xml'))
   try {
     parseString(msg, { explicitArray: false }, (err, xmlJson) => {
-      if (err == null) {
+      if (err === null) {
         parse(xmlJson, req)
         ebank_map.add(req.process, req)
         resetState()

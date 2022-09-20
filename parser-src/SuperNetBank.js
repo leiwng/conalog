@@ -124,7 +124,7 @@ const parseXmlMsg = (parser) => {
     // 将XML格式字串转换为JSON对象，返回值在xmlJson中，错误信息在err中
     parseString(msg, { explicitArray: false }, (err, xmlJson) => {
 
-      if (err == null) {
+      if (err === null) {
 
         //将JSON格式的KV，存入PackMsgInfo
         parse(xmlJson, PackMsgInfo)
@@ -488,7 +488,7 @@ let messageHandler = (parser, channel, message) => {
         // 3. back to idle state and init data
         parseXmlMsg(parse)
         let finalPackData = super_netbank_map.get(PackMsgInfo.processID).data
-        if (finalPackData != null) {
+        if (finalPackData !== null) {
           finalPackData['duration'] = finalPackData.endTime - finalPackData.startTime
           parser.sendResult(JSON.stringify(finalPackData))
           super_netbank_map.delete(PackMsgInfo.processID)

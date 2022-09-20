@@ -34,7 +34,7 @@ const parsexmls = (parser, buffer, time) => {
         if (buffer.indexOf("<?xml") != -1) {
             let msg = buffer.substring(buffer.indexOf('<'), buffer.lastIndexOf('>') + 1);
             parseString(msg, { explicitArray: false }, (err, xmlJson) => {
-                if (err == null) {
+                if (err === null) {
                     let result = xmlJson
                     result['startTime'] = parseTs(time)
                     let finalResult = {}

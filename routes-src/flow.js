@@ -37,7 +37,7 @@ router.post('/scan', function(req, res, next) {
     var query = {flowId: flow.flowId};
     mongoProvider.query(constants.FLOW_COLL, query)
       .then(function(result) {
-        if (result !== undefined && result != null) {
+        if (result !== undefined && result !== null) {
           // already saved, update
           flow.status = result.status;
         }
@@ -162,7 +162,7 @@ console.log('hi2')
 router.get('/list', function(req, res, next) {
   mongoProvier.list(constants.FLOW_COLL, {})
     .then(function(list) {
-      if (list !== undefined && list != null && list.length !== 0)
+      if (list !== undefined && list !== null && list.length !== 0)
         res.json(list);
       else
         res.sendStatus(404);
@@ -183,7 +183,7 @@ router.put('/', function(req, res, next) {
   // query
   mongoProvier.query(constants.FLOW_COLL, {flowId: flowId})
     .then(function(value) {
-      if (value !== undefined && value != null) {
+      if (value !== undefined && value !== null) {
         // ok - now let's operate api
         if (status === 'running')
           gatewayProvider.startApi(flowId)

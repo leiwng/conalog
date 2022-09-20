@@ -44,7 +44,7 @@ subClient.on('message', (channel, message) => {
   let json = JSON.parse(message)
   
   // create handler for new source
-  if (handlers[message.source] === undefined || handlers[message.source] == null) {
+  if (handlers[message.source] === undefined || handlers[message.source] === null) {
     let esbParser = new EsbParser({outputCallback: outputCallback})
     handlers[message.source] = esbParser
   }

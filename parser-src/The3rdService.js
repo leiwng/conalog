@@ -84,7 +84,7 @@ const parseXmlMsg = (parser) => {
   try {
     // 将XML格式字串转换为JSON对象，返回值在xmlJson中，错误信息在err中
     parseString(MsgRecBuf, { explicitArray: false }, (err, xmlJson) => {
-      if (err == null) {
+      if (err === null) {
 
         //Debug
         // console.log('parseXmlMsg:Before parseString:xmlJson->MsgInfo')

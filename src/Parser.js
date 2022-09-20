@@ -122,7 +122,7 @@ class Parser {
 
     sendResult(message) {
         let msg = this.collectMetaData(message)
-        if (msg == null) {
+        if (msg === null) {
             // this.sendError(message, 'sendResult Error', new Error('Parser Error in Single Line.'))
             return
         }
@@ -218,7 +218,7 @@ class Parser {
 
     collectMetaData(message) {
         let meta = this.collectorMetaList.reduce((prev, curr) => {
-            if (prev == null) {
+            if (prev === null) {
                 let json = {host: curr.host, source: curr.source, startTs: curr.startTs}
                 return json
             }
@@ -229,7 +229,7 @@ class Parser {
         }, null)
 
         let msg = null
-        if (meta != null) {
+        if (meta !== null) {
             if (meta['endTs'] !== undefined)
                 meta['duration'] = meta['endTs'] - meta['startTs']
 

@@ -26,7 +26,7 @@ let messageHandler = (parser, channel, message) => {
   switch (state) {
 
     case states.header:
-      if (message.match('RECVXML') != null || message.match('SENDXML') != null) {
+      if (message.match('RECVXML') !== null || message.match('SENDXML') !== null) {
         try {
 	  if(message.match('RECVXML')){
             let header = esbParser.parse(message)
@@ -50,7 +50,7 @@ let messageHandler = (parser, channel, message) => {
       break;
     
     case states.idle:
-      if (message.match('P') != null  ) {
+      if (message.match('P') !== null  ) {
         try {
           state = states.xml
         }
@@ -67,7 +67,7 @@ let messageHandler = (parser, channel, message) => {
 	if (message.indexOf("</soapenv:Envelope>") != -1) {
         try {
           parseString(buffer, (err, xmlJson) => {
-            if (err == null) {
+            if (err === null) {
               result.xml = xmlJson
               parser.sendResult(JSON.stringify(result))
             }

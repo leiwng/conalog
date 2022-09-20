@@ -34,7 +34,7 @@ let messageHandler = (parser, channel, message) => {
       if(message.indexOf("</msg>") != -1){
         try {
           parseString(buffer,{explicitArray : false}, (err, xmlJson) => {
-            if (err == null) {
+            if (err === null) {
              // result.xml = xmlJson
 							let msg = xmlJson.msg.$
 							let txt = xmlJson.msg.txt

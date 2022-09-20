@@ -33,7 +33,7 @@ router.post('/', (req, res, next) => {
 
   mongoProvider.query(constants.PARSER_COLL, query)
     .then(result => {
-      if (result === undefined || result == null) {
+      if (result === undefined || result === null) {
         return mongoProvider.insert(constants.PARSER_COLL, parser)
           .then(json => {
               console.log(json)
@@ -63,11 +63,11 @@ router.get('/', (req, res, next) => {
   let query = {}
 
   let id = req.query.id
-  if (id !== undefined && id != null)
+  if (id !== undefined && id !== null)
     query['id'] = id
 
   let name = req.query.name
-  if (name !== undefined && name != null)
+  if (name !== undefined && name !== null)
     query['name'] = name
 
   mongoProvider.list(constants.PARSER_COLL, query, constants.COLLECTOR_LIMIT, null, 0)
@@ -225,7 +225,7 @@ router.get('/instances', (req, res, next) => {
   let query = {}
 
   let instanceId = req.query.id
-  if (instanceId !== undefined && instanceId != null) {
+  if (instanceId !== undefined && instanceId !== null) {
     query['id'] = instanceId
 
     try {

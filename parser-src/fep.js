@@ -52,7 +52,7 @@ let messageHandler = (parser, channel, message) => {
         try {
 					/*single-line xml*/
           parseString(message, (err, xmlJson) => {
-            if (err == null) {
+            if (err === null) {
               result.message = xmlJson
               parser.sendResult(JSON.stringify(result))
             } else {
@@ -91,7 +91,7 @@ let messageHandler = (parser, channel, message) => {
 					/*datagram to xml*/
           let xml = packet.xml(message)
           parseString(xml, (err, xmlJson) => {
-            if (err == null) {
+            if (err === null) {
               result.message = xmlJson
               parser.sendResult(JSON.stringify(result))
             } else {
@@ -154,7 +154,7 @@ let messageHandler = (parser, channel, message) => {
         try {
           buffer = buffer.replace(/\]+>/g, '').replace(/<!\[CDATA\[/g, '')
           parseString(buffer, (err, xmlJson) => {
-            if (err == null) {
+            if (err === null) {
               result.message = xmlJson
               parser.sendResult(JSON.stringify(result))
             } else {

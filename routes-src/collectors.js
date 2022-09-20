@@ -146,7 +146,7 @@ router.put('/', function(req, res, next) {
 
 router.delete('/:id', (req, res, next) => {
   let id = req.params.id
-  if (id === undefined || id == null)
+  if (id === undefined || id === null)
     res.sendStatus(412)
 
   let query = { _id: new ObjectID(id) }
@@ -247,7 +247,7 @@ router.post('/instances', (req, res, next) => {
 
   mongoProvider.query(constants.COLLECTOR_COLL, query)
     .then(collector => {
-      if (collector !== undefined || collector != null) {
+      if (collector !== undefined || collector !== null) {
         collectorManager.startCollector(id)
         res.sendStatus(200)
       }
@@ -278,7 +278,7 @@ router.get('/instances/:category', (req, res, next) => {
   // 1. list from mongodb
   mongoProvider.list(constants.COLLECTOR_COLL, query, constants.COLLECTOR_LIMIT, null, 0)
     .then(list => {
-      if (list !== undefined && list != null) {
+      if (list !== undefined && list !== null) {
         // 2. get status of each item
         let statusList = list.map(collector => {
           let statusJson = _.clone(collector)
@@ -289,7 +289,7 @@ router.get('/instances/:category', (req, res, next) => {
             return null
         })
         .reduce((prev, curr, index) => {
-          if (curr != null)
+          if (curr !== null)
             return prev.push(curr)
           else
             return prev
@@ -317,7 +317,7 @@ router.delete('/instances/:id', (req, res, next) => {
 
   mongoProvider.query(constants.COLLECTOR_COLL, query)
     .then(collector => {
-      if (collector !== undefined || collector != null) {
+      if (collector !== undefined || collector !== null) {
         collectorManager.stopCollector(id)
         res.sendStatus(200)
       }
@@ -344,7 +344,7 @@ router.get('/status/:category', function(req, res, next) {
   // 1. list from mongodb
   mongoProvider.list(constants.COLLECTOR_COLL, query, constants.COLLECTOR_LIMIT, null, 0)
     .then(list => {
-      if (list !== undefined && list != null) {
+      if (list !== undefined && list !== null) {
         // 2. get status of each item
         let statusList = list.map(collector => {
           let statusJson = _.clone(collector)

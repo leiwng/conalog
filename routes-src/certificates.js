@@ -27,7 +27,7 @@ let decryptPass = (name, host, pass, ts) => {
 
   return mongoProvider.query(constants.USER_COLL, query)
     .then(user => {
-      if (user !== undefined && user != null) {
+      if (user !== undefined && user !== null) {
         // got conalog user, now create key
         let keySeed = host + user.pass + ts
         let hash = Crypto.createHash('sha256')
@@ -53,7 +53,7 @@ let encryptPass = (name, host, pass, ts) => {
 
   return mongoProvider.query(constants.USER_COLL, query)
     .then(user => {
-      if (user !== undefined && user != null) {
+      if (user !== undefined && user !== null) {
         // got conalog user, now create key
         let keySeed = host + user.pass + ts
         let hash = Crypto.createHash('sha256')
@@ -137,11 +137,11 @@ router.get('/', (req, res, next) => {
   let query = {}
 
   let id = req.query.id
-  if (id !== undefined && id != null) 
+  if (id !== undefined && id !== null) 
     query['_id'] = new ObjectID(id)
   
   let host = req.query.host
-  if (host !== undefined && host != null)
+  if (host !== undefined && host !== null)
     query['host'] = host
 
   certManager.listCerts(query)
@@ -162,7 +162,7 @@ router.get('/', (req, res, next) => {
 router.get('/:id/validation/', (req, res, next) => {
   let query = {}
   let id = req.params.id
-  if (id !== undefined && id != null)
+  if (id !== undefined && id !== null)
     query['_id'] = new ObjectID(id)
   else {
     res.sendStatus(412)
@@ -242,7 +242,7 @@ router.put('/', (req, res, next) => {
   // 1. query user pass
   mongoProvider.query(constants.USER_COLL, {name: name})
     .then(result => {
-      if (result !== undefined && result != null) {
+      if (result !== undefined && result !== null) {
         /*
         // got user, now create key
         let keySeed = host + result.pass + ts

@@ -62,7 +62,7 @@ const parseXmlMsg = (parser) => {
   try {
     // 将XML格式字串转换为JSON对象，返回值在xmlJson中，错误信息在err中
     parseString(msg, { explicitArray: false }, (err, xmlJson) => {
-      if (err == null) {
+      if (err === null) {
         //将JSON格式的KV，转换成JavaScript的Map中的KV，存入PackMsgInfo
         parse(xmlJson, PackMsgInfo)
         let existPack = nu_presys_map.lookup(PackMsgInfo.processID)
@@ -247,7 +247,7 @@ let messageHandler = (parser, channel, message) => {
         // 3. back to idle state and init data
         parseXmlMsg(parse)
         let finalPackData = nu_presys_map.get(PackMsgInfo.processID).data
-        if (finalPackData != null) {
+        if (finalPackData !== null) {
           finalPackData['duration'] = finalPackData.endTime - finalPackData.startTime
           parser.sendResult(JSON.stringify(finalPackData))
           nu_presys_map.delete(PackMsgInfo.processID)

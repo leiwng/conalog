@@ -38,7 +38,7 @@ router.post('/login', function(req, res, next) {
   mongoProvider.query(constants.USER_COLL, {name: userName})
     .then(function(result) {
       // console.log(result)
-      if (result !== undefined && result != null) {
+      if (result !== undefined && result !== null) {
         // verify
         var rawPass = result.pass;
         hash.update(rawPass + userSalt);
@@ -111,7 +111,7 @@ router.put('/', function(req, res, next) {
   // console.log('router /update', JSON.stringify(req.body), JSON.stringify(req.session))
 
   // check auth
-  if (req.session.auth === undefined || req.session.auth == null) {
+  if (req.session.auth === undefined || req.session.auth === null) {
     // no auth - return 401
     logger.warning(3212,
       null,
@@ -125,7 +125,7 @@ router.put('/', function(req, res, next) {
   // check old pass
   mongoProvider.query(constants.USER_COLL, {name: req.session.user})
     .then(user => {
-      if (user !== undefined && user != null) {
+      if (user !== undefined && user !== null) {
         // verify old pass
         hash.update(user.pass + salt)
         let saltedPass = hash.digest('hex')
