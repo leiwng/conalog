@@ -56,7 +56,7 @@ app.disable('etag');
 // CROS headers
 var originUrl = 'http://' + config.conalogFrontHost + ':' + config.conalogFrontPort;
 // console.log("Access-Control-Allow-Origin", originUrl);
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   // don't use wildcard to prevent session cookies from failing
   res.header("Access-Control-Allow-Origin", originUrl);
   // allow session cookies
@@ -75,7 +75,7 @@ app.use('/certificates', certificates);
 app.use('/parsers', parsers);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
   next(err, req, res, next);
@@ -86,7 +86,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use((err, req, res, next) => {
     console.log(req.originalUrl, err.stack)
     res.status(err.status || 500);
     res.render('error', {

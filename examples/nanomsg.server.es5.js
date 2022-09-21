@@ -15,7 +15,7 @@ var topic = 'ac_ls4';
 
 var repSock = _nanomsg2.default.socket('rep');
 
-repSock.on('data', function (buf) {
+repSock.on('data', buf => {
   var topic = buf.toString();
   console.log(topic);
 });

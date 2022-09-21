@@ -16,7 +16,7 @@ var topic = 'pc_tail2';
 var pullSock = _nanomsg2.default.socket('pull');
 var reqSock = _nanomsg2.default.socket('req');
 
-reqSock.on('data', function (buf) {
+reqSock.on('data', buf => {
   var portInfo = JSON.parse(buf.toString());
   console.log(portInfo);
 
@@ -25,7 +25,7 @@ reqSock.on('data', function (buf) {
     // since I tested with docker, I have to manually use docker port to figure out the port mapping
     // you could use tools/docker-port-mapping tool
     pullSock.connect(protocol + host + ':' + pullPort);
-    pullSock.on('data', function (buf) {
+    pullSock.on('data', buf => {
       console.log(buf.toString());
     });
   }
@@ -34,7 +34,7 @@ reqSock.on('data', function (buf) {
 var reqUrl = protocol + host + ':' + requestPort;
 console.log('reqUrl: ' + reqUrl);
 reqSock.connect(reqUrl);
-setTimeout(function () {
+setTimeout(() => {
   console.log('reqSock.send: ' + topic);
   reqSock.send(topic);
 }, 100);

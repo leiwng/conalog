@@ -27,8 +27,8 @@ Program
 var conn =  new Client();
 var iconv =  new Iconv('GB18030','UTF-8');
 
-  conn.on('ready', function() {
-    conn.exec('tail -F ' + Program.file, function(err, stream){
+  conn.on('ready', () => {
+    conn.exec('tail -F ' + Program.file, (err, stream) => {
        if(err) {
          // console.error(JSON.stringify(err));
          conn.end();
@@ -36,11 +36,11 @@ var iconv =  new Iconv('GB18030','UTF-8');
        }
 
        stream
-        .on('end',function() {
+        .on('end',() => {
           conn.end();
           process.exit()
         })
-        .on('data', function(data) {
+        .on('data', data => {
           // console.log(data)
           try {
             var parserstr = iconv.convert(new Buffer(data)).toString();
@@ -151,7 +151,7 @@ function readTag(ob)
 function parseXML(str,header)
 {
    var temp = (str);
-   xmlreader.read(temp, function (err, res) {
+   xmlreader.read(temp, (err, res) => {
      if (err) {
        // console.error(JSON.stringify(err))
        return
