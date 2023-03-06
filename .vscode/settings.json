@@ -1,3 +1,11 @@
 {
-    "deepscan.enable": true
+    "deepscan.enable": true,
+    "[python]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+    "[javascript]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    }
 }

@@ -1,63 +1,61 @@
-import constants from '../../util/constants'
-import ActiveCollector from './ActiveCollector'
-import PassiveCollector from './PassiveCollector'
-import AgentCollector from './AgentCollector'
-import MongoProvider from '../MongoProvider'
-let mongoProvider = new MongoProvider()
+import constants from "../../util/constants";
+import ActiveCollector from "./ActiveCollector";
+import PassiveCollector from "./PassiveCollector";
+import AgentCollector from "./AgentCollector";
+import MongoProvider from "../MongoProvider";
+let mongoProvider = new MongoProvider();
 
 // collector data object
 class Collector {
   constructor(json) {
     // common
-    this._id = json._id
-    this.ts = json.ts
-    this.name = json.name
-    this.category = json.category // active, passive
-    this.type = json.type // active: interval, timer; passive: file_tail, net_cap
-    this.cmd = json.cmd
-    this.param = json.param
-    this.host = json.host
-    this.encoding = json.encoding
-    this.channel = json.channel
-    this.desc = json.desc
+    this._id = json._id;
+    this.ts = json.ts;
+    this.name = json.name;
+    this.category = json.category; // active, passive
+    this.type = json.type; // active: interval, timer; passive: file_tail, net_cap
+    this.cmd = json.cmd;
+    this.param = json.param;
+    this.host = json.host;
+    this.encoding = json.encoding;
+    this.channel = json.channel;
+    this.desc = json.desc;
 
-    if (this.category == 'active') {
+    if (this.category == "active") {
       this.trigger = json.trigger;
     }
-
   }
 } // class Collector
 
 // collector runtime object
 class CollectorTask extends Collector {
-  constructor({collectorJson}) {
-    super(collectorJson)
+  constructor({ collectorJson }) {
+    super(collectorJson);
 
     switch (collectorJson.category) {
-      case 'active':
-      this.task = new ActiveCollector({
-        collectorJson: this
-      })
-      break
+      case "active":
+        this.task = new ActiveCollector({
+          collectorJson: this,
+        });
+        break;
 
-      case 'passive':
-      this.task = new PassiveCollector({
-        collectorJson: this
-      })
-      break
+      case "passive":
+        this.task = new PassiveCollector({
+          collectorJson: this,
+        });
+        break;
 
-      case 'agent':
-      this.task = new AgentCollector({
-        collector: this
-      })
-      break
+      case "agent":
+        this.task = new AgentCollector({
+          collector: this,
+        });
+        break;
 
       default:
-      return NULL
-      
+        return NULL;
     }
 
-    return this
+    return this;
   }
 
   work() {
@@ -81,7 +79,7 @@ class CollectorTask extends Collector {
     }
     */
 
-    this.task.start()
+    this.task.start();
   }
 
   rest() {
@@ -105,16 +103,16 @@ class CollectorTask extends Collector {
     }
     */
 
-    this.task.stop()
+    this.task.stop();
   }
 
   getActivityInfo() {
-      return this.task.getLastActivity()
+    return this.task.getLastActivity();
   }
 
   getRunningFlag() {
-    return this.task.getRunningFlag()
+    return this.task.getRunningFlag();
   }
 } // class CollectorTask
 
-export { Collector, CollectorTask }
+export { Collector, CollectorTask };

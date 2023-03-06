@@ -29,7 +29,7 @@ class FilebeatSpliter {
   constructor(redisUrl, filebeatChannel) {
     // this.pubClient = Redis.createClient(redisUrl)
     let that = this
-    
+
     this.subClient = Redis.createClient(redisUrl)
     // console.log(redisUrl, filebeatChannel)
 
@@ -76,7 +76,7 @@ class FilebeatSpliter {
 
     if (!existFlag) {
       this.pathList.push({path: path, channel: channel, callback: callback})
-      
+
     }
   }
 

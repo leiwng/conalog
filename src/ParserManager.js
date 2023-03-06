@@ -37,6 +37,8 @@ class ParserManager {
 
   startInstance({parserId: parserId}) {
     let that = this
+
+    
     let query = {_id: new ObjectID(parserId)}
 
     return mongoProvider.query(constants.PARSER_COLL, query)
@@ -51,7 +53,7 @@ class ParserManager {
           let outType = parser.output.type
           let parameter = parser.parameter
 
-          let child = ChildProcess.fork(config.parserPathPrefix + path, 
+          let child = ChildProcess.fork(config.parserPathPrefix + path,
             [config.redisUrl, config.nsqdUrl, config.nsqlookupdUrl, inChannel, inType, outChannel, outType, parameter])
 
           /*
@@ -66,7 +68,7 @@ class ParserManager {
               null,
               'Parser Instance Exit',
               JSON.stringify({instanceId: that.instanceId, parserName: parser.name, code: code, signal: signal}))
-              
+
             // remove this child info from instanceTable
             that.instanceTable.filter(curr => {
               let pid = curr.process.pid
@@ -97,7 +99,7 @@ class ParserManager {
               return curr
             })
           })
-          
+
           let instanceId = new Date().getTime().toString()
           child.instanceId = instanceId
           let childInfo = {id: instanceId, parserId: parser._id.toString(), process: child}
@@ -161,14 +163,14 @@ class ParserManager {
           else
             return true
         })
-  
+
         // sync instance table to redis
         let instanceList = that.instanceTable.map(instance => {
           return instance.parserId
         })
         // console.log('ParserManager::stopInstance', instanceList)
         redisProvider.set(constants.PLANNED_PARSER_LIST, JSON.stringify(instanceList))
-  
+
         return {id: childInfo.instanceId}
       }
     }
